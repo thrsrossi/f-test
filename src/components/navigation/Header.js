@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAxios } from '../helpers/hooks/useAxios';
+import { useAxios } from '../../helpers/hooks/useAxios';
+import Logo from '../../assets/logos/GC_green.png';
 
 export const Header = () => {
   const endpoint = '/users/thrsrossi/repos';
@@ -25,9 +26,21 @@ export const Header = () => {
   console.log('result', result);
   console.log('hasError', hasError);
   console.log('isLoading', isLoading);
-  return <StyledHeader>Header</StyledHeader>;
+  return (
+    <StyledHeader>
+      <StyledLogo src={Logo} alt='GitConnext Logo' />
+    </StyledHeader>
+  );
 };
 
 const StyledHeader = styled.header`
+  position: absolute;
+  top: 0;
+  z-index: 999;
   width: 100%;
+  background: ${(props) => props.theme.color.darkGreen};
+`;
+const StyledLogo = styled.img`
+  height: 6rem;
+  margin: 1rem;
 `;

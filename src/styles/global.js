@@ -22,9 +22,15 @@ export const GlobalStyle = createGlobalStyle`
   }
   html {
     font-size: 62.5%;
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
   }
   body {
-    like-height: 1;
+    line-height: 1;
+    min-height: 100%;
+  }
+  body > #root > div {
+    height: 100vh;
   }
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {
