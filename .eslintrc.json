@@ -9,6 +9,7 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
+  "ignorePatterns": ["node_modules/"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
