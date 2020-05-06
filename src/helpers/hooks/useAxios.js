@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export const useAxios = (payload) => {
-  //FIXME: Why is baseUrl not working?
-  // const baseUrl = 'https://api.github.com';
+  const baseUrl = 'https://api.github.com';
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState();
   const [hasError, setHasError] = useState(false);
@@ -14,7 +13,7 @@ export const useAxios = (payload) => {
         setIsLoading(true);
         try {
           const result = await axios({
-            url: payload.endpoint,
+            url: baseUrl + payload.endpoint,
             method: payload.method || 'GET',
             params: payload.params || null,
             data: payload.data || null,

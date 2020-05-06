@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { useAxios } from '../helpers/hooks/useAxios';
 
 export const Header = () => {
+  const endpoint = '/users/thrsrossi/repos';
   const [payload, setPayload] = useState({});
   const [result, setResult] = useState(null);
-  const endpoint = 'https://api.github.com/users/thrsrossi/repos';
 
   const { data, isLoading, hasError } = useAxios(payload);
 
