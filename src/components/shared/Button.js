@@ -17,8 +17,8 @@ const Container = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
   background: transparent;
-  color: ${({ theme }) => theme.color.lightGreen};
-  border: 1px solid ${({ theme }) => theme.color.lightGreen};
+  color: ${({ theme }) => theme.color.brightGreen};
+  border: 1px solid ${({ theme }) => theme.color.brightGreen};
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   padding: 1.2rem 3rem 1rem 3rem;
@@ -27,6 +27,6 @@ const Container = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.color.darkGreen};
-    background: ${({ theme }) => theme.color.lightGreen};
+    background: ${({ theme }) => theme.color.brightGreen};
   }
 `;

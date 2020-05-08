@@ -4,19 +4,48 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { InputField } from '../components/shared/InputField';
 import { Button } from '../components/shared/Button';
-import Icon from '../assets/icons/search-icon-white.png';
+import SearchIcon from '../assets/icons/search-icon-white.png';
 import LogoGreen from '../assets/logos/gitconnect_green.png';
 
 export const Search = () => {
+  const regex = /^[a-öA-Ö\s]*$/; // Only letters and spaces
+  const regex2 = /^[a-öA-Ö]/; // Start with letter
+
   const initialValues = {
     location: '',
   };
+
   const validationSchema = yup.object().shape({
     location: yup
       .string()
       .required('This is a required field.')
-      .min(3, 'Entry needs to be at least three characters long.'),
+      .matches(regex, 'Only letters and spaces are allowed.')
+      .matches(regex2, 'Entry cannot begin with whitespace.')
+      .min(3, 'Entry needs to be at least three characters.')
+      .max(25, 'Entry can be maximum 25 characters.'),
   });
+
+  const formatInputValue = (string) => {
+    // Remove extra spaces, transform to lowercase, split into array
+    const trimmedString = string.toLowerCase().trim().replace(/\s+/g, ' ');
+    const wordArray = trimmedString.split(' ');
+
+    // If word count is more than one, add '+' after each word except for last word.
+    // Finally add last word and return new formatted string. Else return single word from array.
+    if (wordArray.length !== 1) {
+      let newString = '';
+      for (let i = 0; i < wordArray.length - 1; i++) {
+        let word = wordArray[i] + '+';
+        newString = newString + word;
+      }
+      let [lastItem] = wordArray.slice(-1);
+      newString = newString + lastItem;
+      return newString;
+    } else {
+      return wordArray[0];
+    }
+  };
+
   return (
     <Wrapper>
       <ContentContainer>
@@ -32,8 +61,10 @@ export const Search = () => {
             validationSchema={validationSchema}
             initialValues={initialValues}
             onSubmit={(values, { resetForm }) => {
+              const formattedInputValue = formatInputValue(values.location);
               // eslint-disable-next-line no-console
-              console.log('values submit', values);
+              console.log('formatted value', formattedInputValue);
+
               resetForm();
             }}
           >
@@ -50,10 +81,10 @@ export const Search = () => {
                 <TopWrapper>
                   <InputField
                     name='location'
-                    label='Start connecting'
+                    label='Enter your location'
                     id='location'
                     type='text'
-                    placeholder='Enter your location'
+                    placeholder='City or country'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.location}
@@ -63,7 +94,7 @@ export const Search = () => {
                       touched.location &&
                       `${errors.location}`
                     }
-                    icon={Icon}
+                    icon={SearchIcon}
                   />
                 </TopWrapper>
                 <BottomWrapper>
@@ -94,7 +125,7 @@ const ContentContainer = styled.div`
   position: relative;
   width: 95vw;
   height: 35rem;
-  border: 1px solid ${({ theme }) => theme.color.lightGreen};
+  border: 1px solid ${({ theme }) => theme.color.brightGreen};
   display: flex;
   flex-direction: column;
 
@@ -140,9 +171,9 @@ const Text = styled.h2`
   font-size: 2rem;
   letter-spacing: 0.1rem;
   font-family: ${({ theme }) => theme.font.comfortaa};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.textGreen};
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 2.8rem;
@@ -178,7 +209,7 @@ const CopyWriteWrapper = styled.div`
   aligm-items: flex-end;
 `;
 const CopyWrite = styled.p`
-  color: ${({ theme }) => theme.color.lightGreen};
+  color: ${({ theme }) => theme.color.brightGreen};
   font-family: ${({ theme }) => theme.font.abel};
   font-size: 1.2rem;
   line-height: 1.5rem;

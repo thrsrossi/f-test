@@ -1,10 +1,10 @@
 export const theme = {
   color: {
-    black: '#000',
-    light: '#f2f2f2',
+    textGreen: '#E7F9E7',
     error: '#9E0000',
     darkGreen: '#050d02',
-    lightGreen: '#00cc00',
+    brightGreen: '#00cc00',
+    lightGrey: '#9F9F9F',
   },
   device: {
     mobileM: '(min-width: 321px)',
