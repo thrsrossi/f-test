@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { InputField } from './InputField';
 import { Button } from './Button';
 import SearchIcon from '../../assets/icons/search-icon-white.png';
+import { useAxios } from '../../helpers/hooks/useAxios';
 
-export const SearchBar = () => {
+export const SearchForm = ({ setInputString, setResult, setHasError }) => {
   const regex = /^[a-öA-Ö\s]*$/; // Only letters and spaces
   const regex2 = /^[a-öA-Ö]/; // Start with letter
 
@@ -29,12 +30,12 @@ export const SearchBar = () => {
     const trimmedString = string.toLowerCase().trim().replace(/\s+/g, ' ');
     const wordArray = trimmedString.split(' ');
 
-    // If word count is more than one, add '+' after each word except for last word.
+    // If word count is more than one, add '&' after each word except for last word.
     // Finally add last word and return new formatted string. Else return single word from array.
     if (wordArray.length !== 1) {
       let newString = '';
       for (let i = 0; i < wordArray.length - 1; i++) {
-        let word = wordArray[i] + '+';
+        let word = wordArray[i] + '&';
         newString = newString + word;
       }
       let [lastItem] = wordArray.slice(-1);
@@ -45,15 +46,28 @@ export const SearchBar = () => {
     }
   };
 
+  const [payload, setPayload] = useState({});
+  const { data, hasError } = useAxios(payload);
+
+  useEffect(() => {
+    if (data) {
+      setResult(data);
+    }
+    if (hasError) {
+      setHasError(true);
+    }
+  }, [data, hasError, setHasError, setResult]);
+
   return (
     <Formik
       validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         const formattedInputValue = formatInputValue(values.location);
-        // eslint-disable-next-line no-console
-        console.log('formatted value', formattedInputValue);
-
+        setInputString(formattedInputValue);
+        setPayload({
+          endpoint: `/search/users?q=location:${formattedInputValue}`,
+        });
         resetForm();
       }}
     >
