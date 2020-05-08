@@ -1,51 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import { InputField } from '../components/shared/InputField';
-import { Button } from '../components/shared/Button';
-import SearchIcon from '../assets/icons/search-icon-white.png';
 import LogoGreen from '../assets/logos/gitconnect_green.png';
+import { SearchBar } from '../components/shared/SearchBar';
 
 export const Search = () => {
-  const regex = /^[a-öA-Ö\s]*$/; // Only letters and spaces
-  const regex2 = /^[a-öA-Ö]/; // Start with letter
-
-  const initialValues = {
-    location: '',
-  };
-
-  const validationSchema = yup.object().shape({
-    location: yup
-      .string()
-      .required('This is a required field.')
-      .matches(regex, 'Only letters and spaces are allowed.')
-      .matches(regex2, 'Entry cannot begin with whitespace.')
-      .min(3, 'Entry needs to be at least three characters.')
-      .max(25, 'Entry can be maximum 25 characters.'),
-  });
-
-  const formatInputValue = (string) => {
-    // Remove extra spaces, transform to lowercase, split into array
-    const trimmedString = string.toLowerCase().trim().replace(/\s+/g, ' ');
-    const wordArray = trimmedString.split(' ');
-
-    // If word count is more than one, add '+' after each word except for last word.
-    // Finally add last word and return new formatted string. Else return single word from array.
-    if (wordArray.length !== 1) {
-      let newString = '';
-      for (let i = 0; i < wordArray.length - 1; i++) {
-        let word = wordArray[i] + '+';
-        newString = newString + word;
-      }
-      let [lastItem] = wordArray.slice(-1);
-      newString = newString + lastItem;
-      return newString;
-    } else {
-      return wordArray[0];
-    }
-  };
-
   return (
     <Wrapper>
       <ContentContainer>
@@ -57,52 +15,7 @@ export const Search = () => {
           </TextBox>
         </TextContainer>
         <SearchContainer>
-          <Formik
-            validationSchema={validationSchema}
-            initialValues={initialValues}
-            onSubmit={(values, { resetForm }) => {
-              const formattedInputValue = formatInputValue(values.location);
-              // eslint-disable-next-line no-console
-              console.log('formatted value', formattedInputValue);
-
-              resetForm();
-            }}
-          >
-            {({
-              touched,
-              errors,
-              values,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <TopWrapper>
-                  <InputField
-                    name='location'
-                    label='Enter your location'
-                    id='location'
-                    type='text'
-                    placeholder='City or country'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.location}
-                    error={errors.location && touched.location}
-                    message={
-                      errors.location &&
-                      touched.location &&
-                      `${errors.location}`
-                    }
-                    icon={SearchIcon}
-                  />
-                </TopWrapper>
-                <BottomWrapper>
-                  <Button type='submit' text='Search' disabled={isSubmitting} />
-                </BottomWrapper>
-              </Form>
-            )}
-          </Formik>
+          <SearchBar />
         </SearchContainer>
         <CopyWriteWrapper>
           <CopyWrite>&copy; 2020 </CopyWrite>
@@ -178,28 +91,6 @@ const Text = styled.h2`
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 2.8rem;
   }
-`;
-const Form = styled.form`
-  padding: 0 2rem;
-  width: 100%;
-  @media ${({ theme }) => theme.device.tablet} {
-    height: 22rem;
-  }
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 0 2.5rem;
-  }
-`;
-const TopWrapper = styled.div`
-  flex: 1;
-`;
-const BottomWrapper = styled.div`
-  flex: 1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 12rem;
-  padding-bottom: 2rem;
 `;
 const CopyWriteWrapper = styled.div`
   position: absolute;
