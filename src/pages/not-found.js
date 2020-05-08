@@ -7,7 +7,6 @@ export const NotFound = () => {
     <Container>
       <Content>
         <Text>Ooops! Page not found...</Text>
-
         <LinkText to='/search'>...back to search</LinkText>
       </Content>
     </Container>
@@ -24,7 +23,7 @@ const Container = styled.div`
 `;
 const Content = styled.main`
   width: 30rem;
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.textGreen};
 `;
 const Text = styled.h2`
   font-size: 3rem;
@@ -35,7 +34,7 @@ const LinkText = styled(NavLink)`
   display: block;
   font-family: ${({ theme }) => theme.font.abel};
   font-size: 2rem;
-  color: ${({ theme }) => theme.color.lightGreen};
+  color: ${({ theme }) => theme.color.brightGreen};
   text-decoration: none;
   &:hover {
     text-decoration: underline;

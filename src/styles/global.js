@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100%;
   }
   body > #root > div {
-    height: 100vh;
+    min-height: 100vh;
   }
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {

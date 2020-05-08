@@ -7,12 +7,19 @@ export const InputField = ({
   error,
   message,
   icon,
+  autoFocus,
   ...inputProps
 }) => (
   <>
     {label && <Label htmlFor={id}>{label}</Label>}
     <InputContainer>
-      <Input {...inputProps} id={id} error={error} message={message} />
+      <Input
+        {...inputProps}
+        id={id}
+        error={error}
+        message={message}
+        autoFocus={autoFocus}
+      />
       {icon && <InputIcon src={icon} alt='Icon' />}
     </InputContainer>
     <Error>{message && <Message>{message}</Message>}</Error>
@@ -21,13 +28,13 @@ export const InputField = ({
 
 const Label = styled.label`
   display: inline-block;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-family: ${({ theme }) => theme.font.abel};
   letter-spacing: 0.1rem;
   margin-right: 0.5rem;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.textGreen};
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.8rem;
   }
@@ -53,21 +60,20 @@ const Input = styled.input`
   padding-left: 4rem;
   outline: none;
   font-family: ${({ theme }) => theme.font.abel};
+  color: ${({ theme }) => theme.color.textGreen};
   letter-spacing: 0.1rem;
-  border-bottom: 2px solid ${({ theme }) => theme.color.lightGreen};
+  border-bottom: 3px solid ${({ theme }) => theme.color.brightGreen};
   ${(props) =>
     props.message &&
     css`
       border-bottom: 3px solid ${(props) => props.theme.color.error};
     `}
-
   ::placeholder {
-    color: #959595;
-    opacity: 1;
+    color: ${({ theme }) => theme.color.lightGrey};
     font-style: italic;
   }
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 const InputIcon = styled.img`

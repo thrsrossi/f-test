@@ -1,83 +1,63 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import { InputField } from '../components/shared/InputField';
-import { Button } from '../components/shared/Button';
-import Icon from '../assets/icons/search-icon-white.png';
-import LogoGreen from '../assets/logos/gitconnect_green.png';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
+import { SearchForm } from '../components/shared/SearchForm';
+import { Results } from '../components/result/Results';
 
 export const Search = () => {
-  const initialValues = {
-    location: '',
-  };
-  const validationSchema = yup.object().shape({
-    location: yup
-      .string()
-      .required('This is a required field.')
-      .min(3, 'Entry needs to be at least three characters long.'),
-  });
+  const [inputString, setInputString] = useState('');
+  const [result, setResult] = useState(null);
+  const [hasError, setHasError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    if (result && result.total_count === 0) {
+      setMessage('No results, try again.');
+      setShowResults(false);
+    } else if (result && result.total_count > 0) {
+      setMessage('');
+      setShowResults(true);
+    }
+    if (hasError) {
+      setMessage('Something went wrong, please try again.');
+      setShowResults(false);
+    }
+  }, [result, hasError]);
+
   return (
-    <Wrapper>
-      <ContentContainer>
-        <TextContainer>
-          <TextBox>
-            <Text>Connect with</Text>
-            <Text>active GitHubers</Text>
-            <Text>near you</Text>
-          </TextBox>
-        </TextContainer>
-        <SearchContainer>
-          <Formik
-            validationSchema={validationSchema}
-            initialValues={initialValues}
-            onSubmit={(values, { resetForm }) => {
-              // eslint-disable-next-line no-console
-              console.log('values submit', values);
-              resetForm();
-            }}
-          >
-            {({
-              touched,
-              errors,
-              values,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <TopWrapper>
-                  <InputField
-                    name='location'
-                    label='Start connecting'
-                    id='location'
-                    type='text'
-                    placeholder='Enter your location'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.location}
-                    error={errors.location && touched.location}
-                    message={
-                      errors.location &&
-                      touched.location &&
-                      `${errors.location}`
-                    }
-                    icon={Icon}
-                  />
-                </TopWrapper>
-                <BottomWrapper>
-                  <Button type='submit' text='Search' disabled={isSubmitting} />
-                </BottomWrapper>
-              </Form>
-            )}
-          </Formik>
-        </SearchContainer>
+    <Wrapper inputString={inputString}>
+      <ContainerWrapper inputString={inputString}>
+        <TopContainer>
+          <TextContainer>
+            <TextBox>
+              <Text>Connect with</Text>
+              <Text>active GitHubers</Text>
+              <Text>near you</Text>
+            </TextBox>
+          </TextContainer>
+          <SearchContainer>
+            <SearchForm
+              setInputString={setInputString}
+              setResult={setResult}
+              setHasError={setHasError}
+            />
+          </SearchContainer>
+        </TopContainer>
+
+        <BottomContainer message={message}>
+          {message && (
+            <MessageWrapper>
+              <Message>{message}</Message>
+            </MessageWrapper>
+          )}
+          {showResults && result && result.items && (
+            <Results results={result.items} />
+          )}
+        </BottomContainer>
         <CopyWriteWrapper>
-          <CopyWrite>&copy; 2020 </CopyWrite>
-          <Logo src={LogoGreen} alt='Gitconnect logo green' />
+          <CopyWrite>&copy;2020 GITCONNECT</CopyWrite>
         </CopyWriteWrapper>
-      </ContentContainer>
+      </ContainerWrapper>
     </Wrapper>
   );
 };
@@ -85,16 +65,21 @@ export const Search = () => {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.color.darkGreen};
+  background: ${({ theme }) => theme.color.darkGreen};
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
-const ContentContainer = styled.div`
+
+const ContainerWrapper = styled.div`
   position: relative;
+  border: 1px solid ${({ theme }) => theme.color.brightGreen};
+  margin-top: 20rem;
+  height: inherit;
+  margin-bottom: 10rem;
+`;
+const TopContainer = styled.div`
   width: 95vw;
   height: 35rem;
-  border: 1px solid ${({ theme }) => theme.color.lightGreen};
   display: flex;
   flex-direction: column;
 
@@ -112,6 +97,13 @@ const ContentContainer = styled.div`
     width: 75rem;
     height: 45rem;
   }
+`;
+const BottomContainer = styled.div`
+  ${(props) =>
+    props.message &&
+    css`
+      padding: 4rem;
+    `}
 `;
 const TextContainer = styled.div`
   flex: 1;
@@ -140,50 +132,38 @@ const Text = styled.h2`
   font-size: 2rem;
   letter-spacing: 0.1rem;
   font-family: ${({ theme }) => theme.font.comfortaa};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.textGreen};
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 2.8rem;
   }
 `;
-const Form = styled.form`
-  padding: 0 2rem;
-  width: 100%;
-  @media ${({ theme }) => theme.device.tablet} {
-    height: 22rem;
-  }
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 0 2.5rem;
-  }
-`;
-const TopWrapper = styled.div`
-  flex: 1;
-`;
-const BottomWrapper = styled.div`
-  flex: 1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 12rem;
-  padding-bottom: 2rem;
-`;
 const CopyWriteWrapper = styled.div`
   position: absolute;
-  top: 102%;
-  right: 0;
+  top: 100%;
+  right: -5px;
   display: flex;
   aligm-items: flex-end;
+  padding-top: 0.5rem;
 `;
 const CopyWrite = styled.p`
-  color: ${({ theme }) => theme.color.lightGreen};
+  color: ${({ theme }) => theme.color.brightGreen};
   font-family: ${({ theme }) => theme.font.abel};
   font-size: 1.2rem;
   line-height: 1.5rem;
   padding-right: 0.5rem;
+  letter-spacing: 0.3rem;
 `;
-const Logo = styled.img`
-  height: 1.5rem;
+const MessageWrapper = styled.div`
+  height: 10rem;
+  padding: 4rem 0;
+  border-top: 1px solid ${({ theme }) => theme.color.brightGreen};
+`;
+const Message = styled.h3`
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  font-family: ${({ theme }) => theme.font.comfortaa};
+  color: ${({ theme }) => theme.color.textGreen};
 `;

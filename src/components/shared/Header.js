@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useAxios } from '../helpers/hooks/useAxios';
-import Logo from '../assets/logos/GC-green-notext.png';
+import { useAxios } from '../../helpers/hooks/useAxios';
+import Logo from '../../assets/logos/GC-green-notext.png';
 
 export const Header = () => {
   //TODO: Change request to search page
