@@ -11,27 +11,34 @@ export const InputField = ({
 }) => (
   <>
     {label && <Label htmlFor={id}>{label}</Label>}
-    {message && <Message>{message}</Message>}
     <InputContainer>
       <Input {...inputProps} id={id} error={error} message={message} />
       {icon && <InputIcon src={icon} alt='Icon' />}
     </InputContainer>
+    <Error>{message && <Message>{message}</Message>}</Error>
   </>
 );
 
 const Label = styled.label`
   display: inline-block;
-  font-size: 1.6rem;
-  font-family: ${({ theme }) => theme.font.nunito};
+  font-size: 1.4rem;
+  font-family: ${({ theme }) => theme.font.abel};
+  letter-spacing: 0.1rem;
   margin-right: 0.5rem;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.color.light};
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.8rem;
+  }
 `;
 const Message = styled.span`
   color: ${({ theme }) => theme.color.error};
-  font-family: ${({ theme }) => theme.font.nunito};
+  font-family: ${({ theme }) => theme.font.abel};
   font-size: 1.4rem;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.6rem;
+  }
 `;
 const InputContainer = styled.div`
   position: relative;
@@ -39,13 +46,14 @@ const InputContainer = styled.div`
 const Input = styled.input`
   height: 5rem;
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   background: transparent;
   border: none;
   color: #fff;
   padding-left: 4rem;
   outline: none;
-  font-family: ${({ theme }) => theme.font.nunito};
+  font-family: ${({ theme }) => theme.font.abel};
+  letter-spacing: 0.1rem;
   border-bottom: 2px solid ${({ theme }) => theme.color.lightGreen};
   ${(props) =>
     props.message &&
@@ -58,6 +66,9 @@ const Input = styled.input`
     opacity: 1;
     font-style: italic;
   }
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.8rem;
+  }
 `;
 const InputIcon = styled.img`
   height: 1.8rem;
@@ -67,4 +78,8 @@ const InputIcon = styled.img`
   top: 0;
   bottom: 0;
   left: 1rem;
+`;
+const Error = styled.div`
+  height: 2rem;
+  padding-top: 0.5rem;
 `;

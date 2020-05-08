@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAxios } from '../../helpers/hooks/useAxios';
-import Logo from '../../assets/logos/GC_green.png';
+import { Link } from 'react-router-dom';
+import { useAxios } from '../helpers/hooks/useAxios';
+import Logo from '../assets/logos/GC-green-notext.png';
 
 export const Header = () => {
+  //TODO: Change request to search page
   const endpoint = '/users/thrsrossi/repos';
   const [payload, setPayload] = useState({});
   const [result, setResult] = useState(null);
@@ -28,7 +30,9 @@ export const Header = () => {
   console.log('isLoading', isLoading);
   return (
     <StyledHeader>
-      <StyledLogo src={Logo} alt='GitConnext Logo' />
+      <Link to='/search'>
+        <StyledLogo src={Logo} alt='GitConnext Logo' />
+      </Link>
     </StyledHeader>
   );
 };
@@ -41,6 +45,10 @@ const StyledHeader = styled.header`
   background: ${(props) => props.theme.color.darkGreen};
 `;
 const StyledLogo = styled.img`
-  height: 6rem;
-  margin: 1rem;
+  height: 5.5rem;
+  margin: 1.5rem;
+  @media ${({ theme }) => theme.device.tabletL} {
+    height: 7rem;
+    margin: 2rem;
+  }
 `;

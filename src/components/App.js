@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import history from '../history';
 import { DefaultLayout } from '../styles/layouts/default-layout';
-import { Header } from './navigation/Header';
+import { Header } from './Header';
 import { Search } from '../pages/search';
 import { User } from '../pages/user';
 import { NotFound } from '../pages/not-found';

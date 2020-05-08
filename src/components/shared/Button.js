@@ -21,8 +21,9 @@ const Container = styled.button`
   border: 1px solid ${({ theme }) => theme.color.lightGreen};
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  padding: 1.5rem 4rem;
+  padding: 1.2rem 3rem 1rem 3rem;
   border-radius: 0.4rem;
+  font-family: ${({ theme }) => theme.font.comfortaa};
 
   &:hover {
     color: ${({ theme }) => theme.color.darkGreen};
