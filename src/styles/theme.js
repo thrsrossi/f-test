@@ -1,15 +1,23 @@
 export const theme = {
   color: {
     black: '#000',
-    white: '#FFF',
+    light: '#f2f2f2',
+    error: '#9E0000',
+    darkGreen: '#050d02',
+    lightGreen: '#00cc00',
   },
   device: {
-    mobileS: '(max-width: 32rem)',
-    mobileM: '(max-width: 37.5rem)',
-    mobileL: '(max-width: 42.5rem)',
-    tablet: '(max-width: 76.8rem)',
-    laptop: '(max-width: 102.4rem)',
-    laptopL: '(max-width: 144rem)',
-    desktop: '(max-width: 256rem)',
+    mobileM: '(min-width: 321px)',
+    mobileL: '(min-width: 376px)',
+    tabletM: '(min-width: 426px)',
+    tablet: '(min-width: 580px)',
+    tabletL: '(min-width: 769px)',
+    laptop: '(min-width: 1025px)',
+    desktop: '(min-width: 1441px)',
+  },
+  font: {
+    didact: 'Didact Gothic, sans-serif',
+    abel: 'Abel, sans-serif',
+    comfortaa: 'Comfortaa, cursive',
   },
 };
