@@ -7,12 +7,19 @@ export const InputField = ({
   error,
   message,
   icon,
+  autoFocus,
   ...inputProps
 }) => (
   <>
     {label && <Label htmlFor={id}>{label}</Label>}
     <InputContainer>
-      <Input {...inputProps} id={id} error={error} message={message} />
+      <Input
+        {...inputProps}
+        id={id}
+        error={error}
+        message={message}
+        autoFocus={autoFocus}
+      />
       {icon && <InputIcon src={icon} alt='Icon' />}
     </InputContainer>
     <Error>{message && <Message>{message}</Message>}</Error>

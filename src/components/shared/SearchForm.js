@@ -96,6 +96,7 @@ export const SearchForm = ({ setInputString, setResult, setHasError }) => {
                 errors.location && touched.location && `${errors.location}`
               }
               icon={SearchIcon}
+              autoFocus
             />
           </TopWrapper>
           <BottomWrapper>
