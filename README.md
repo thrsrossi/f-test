@@ -1,3 +1,16 @@
+## GitConnect
+
+This is a service that utilizes the GitHub API to get access to other GitHub users close to you. The goal is for the user to be able to enter their location and get a result of users in that same area and sort them in the order they where last active so they can easily find the most relevant ones. This is a way to connect to other passionate coders near you!
+
+### Environment
+
+The project was initialized and made to run in this environment:
+MacOs High Sierra v10.13.6
+Google Chrome browser Version 81.0.4044.129
+Node v12.16.2
+
+The project has Eslint and prettier configs and a husky with a pre-commit hook to ensure that the linter and style guides are followed. There is a .editorconfig file that can be used for local editor settings. See https://editorconfig.org/ for more info.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -42,27 +55,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
