@@ -4,9 +4,9 @@ This is a service that utilizes the GitHub API to get access to other GitHub use
 
 ### Environment
 
-The project was initialized and made to run in this environment:
-MacOs High Sierra v10.13.6
-Google Chrome browser Version 81.0.4044.129
+The project was initialized and made to run in this environment:<br />
+MacOs High Sierra v10.13.6<br />
+Google Chrome browser Version 81.0.4044.129<br />
 Node v12.16.2
 
 The project has Eslint and prettier configs and a husky with a pre-commit hook to ensure that the linter and style guides are followed. There is a .editorconfig file that can be used for local editor settings. See https://editorconfig.org/ for more info.
