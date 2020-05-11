@@ -1,33 +1,10 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useAxios } from '../../helpers/hooks/useAxios';
 import Logo from '../../assets/logos/GC-green-notext.png';
 
 export const Header = () => {
-  //TODO: Change request to search page
-  const endpoint = '/users/thrsrossi/repos';
-  const [payload, setPayload] = useState({});
-  const [result, setResult] = useState(null);
-
-  const { data, isLoading, hasError } = useAxios(payload);
-
-  useEffect(() => {
-    setPayload({
-      endpoint,
-    });
-  }, [endpoint]);
-
-  useEffect(() => {
-    if (data) {
-      setResult(data);
-    }
-  }, [data]);
-
-  console.log('result', result);
-  console.log('hasError', hasError);
-  console.log('isLoading', isLoading);
   return (
     <StyledHeader>
       <Link to='/search'>
