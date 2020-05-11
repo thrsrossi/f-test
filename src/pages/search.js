@@ -51,7 +51,7 @@ export const Search = () => {
             </MessageWrapper>
           )}
           {showResults && result && result.items && (
-            <Results results={result.items} />
+            <Results results={result.items} location={inputString} />
           )}
         </BottomContainer>
         <CopyWriteWrapper>

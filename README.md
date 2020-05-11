@@ -11,6 +11,15 @@ Node v12.16.2
 
 The project has Eslint and prettier configs and a husky with a pre-commit hook to ensure that the linter and style guides are followed. There is a .editorconfig file that can be used for local editor settings. See https://editorconfig.org/ for more info.
 
+### To start project
+
+`git clone https://github.com/thrsrossi/f-test.git`<br />
+`cd f-test`<br />
+`yarn`<br />
+`yarn start`<br />
+`git checkout develop`<br />
+branch feature branches from develop
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

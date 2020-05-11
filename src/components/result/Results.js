@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Result } from './Result';
 
-export const Results = ({ results }) => {
+export const Results = ({ results, location }) => {
   return (
     <Container>
       <ResultList>
-        <Result results={results} />
+        <Result results={results} location={location} />
       </ResultList>
     </Container>
   );
