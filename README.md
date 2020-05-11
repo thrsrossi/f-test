@@ -4,7 +4,7 @@ This is a service that utilizes the GitHub API to get access to other GitHub use
 
 ### Environment
 
-The project was initialized and developed this environment:<br />
+The project was initialized and developed in this environment:<br />
 MacOs High Sierra v10.13.6<br />
 Google Chrome browser Version 81.0.4044.129<br />
 Node v12.16.2
