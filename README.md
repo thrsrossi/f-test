@@ -14,8 +14,11 @@ The project has Eslint and prettier configs and a husky with a pre-commit hook t
 ### To start project
 
 `git clone https://github.com/thrsrossi/f-test.git`<br />
+`cd f-test`<br />
 `yarn`<br />
-`yarn start`
+`yarn start`<br />
+`git checkout develop`<br />
+branch feature branches from develop
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
